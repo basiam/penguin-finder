@@ -1,5 +1,5 @@
 defmodule PenguinFinderTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest PenguinFinder
 
   test "find the index file in a directory" do

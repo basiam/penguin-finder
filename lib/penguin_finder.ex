@@ -1,6 +1,10 @@
 defmodule PenguinFinder do
   @doc """
-  Find index file
+  Find index file in given directory
+
+  ## Examples
+      iex> PenguinFinder.find_index("adasdasdasd")
+      nil
   """
   def find_index(directory) do
     files = Path.wildcard(Path.join(directory, "*.txt"))
