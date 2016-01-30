@@ -14,7 +14,8 @@ defmodule PenguinFinderTest do
 
   test "extracts data from index file" do
     data = PenguinFinder.extract_data(@index_file)
+    assert length(data) == 4
     assert List.first(data) ==
-      PenguinFinder.penguin(name: "Skipper", rank: "Leader")
+      PenguinFinder.penguin(name: "Skipper", rank: "Leader", path: "GNJVEFAYEP.txt")
   end
 end

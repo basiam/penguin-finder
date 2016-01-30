@@ -1,7 +1,7 @@
 defmodule PenguinFinder do
   require Record
 
-  Record.defrecord :penguin, [name: nil, rank: nil]
+  Record.defrecord :penguin, [name: nil, rank: nil, path: "unknown"]
 
   @doc """
   Find index file in given directory
@@ -25,15 +25,14 @@ defmodule PenguinFinder do
   defp extract_info(pid, acc) do
     case IO.read(pid, :line) do
       :eof -> Enum.reverse(acc)
-      info when is_binary(info) ->
-        path = IO.read(pid, :line)
-        extract_info(pid, info, path, acc)
+      info ->
+        extract_info(pid, info, acc)
     end
   end
 
-  defp extract_info(pid, info, path, acc) do
-    [name, rank] = String.split(info, "; ")
-    record = penguin(name: String.strip(name), rank: String.strip(rank))
+  defp extract_info(pid, info, acc) do
+    [name, rank, path] = String.split(info, ": ")
+    record = penguin(name: String.strip(name), rank: String.strip(rank), path: (String.strip(path) <> "" <> ".txt"))
     extract_info(pid, [record|acc])
   end
 
