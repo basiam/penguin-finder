@@ -15,7 +15,7 @@ defmodule PenguinFinder do
     Enum.find files, &(is_index?(&1))
   end
 
-  def extract_data(index_file) do
+  def extract_index_data(index_file) do
     File.open! index_file, fn(pid) ->
       IO.read(pid, :line)
       extract_info(pid, [])
